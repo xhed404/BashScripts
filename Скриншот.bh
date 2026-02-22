@@ -1,0 +1,30 @@
+#!/bin/bash
+OUTPUT_DIR="$HOME/Pictures/Screenshots"
+mkdir -p "$OUTPUT_DIR"
+
+if command -v grim >/dev/null 2>&1; then
+    CAPTURE="grim"
+    NOTIFY="notify-send"
+elif command -v scrot >/dev/null 2>&1; then
+    CAPTURE="scrot"
+    NOTIFY="notify-send"
+else
+    echo "Установите grim или scrot"
+    exit 1
+fi
+
+FILENAME="${OUTPUT_DIR}/$(date +%Y%m%d_%H%M%S)_screenshot.png"
+$CAPTURE "$FILENAME"
+
+if [ $? -eq 0 ]; then
+    $NOTIFY "Скриншот сохранён" "$FILENAME"
+    
+    exiftool -overwrite_original \
+        -DateTimeOriginal="$(date '+%Y:%m:%d %H:%M:%S')" \
+        -UserComment="Автоскриншот $(date)" \
+        "$FILENAME" 2>/dev/null || true
+    
+    echo "Сохранено: $FILENAME"
+else
+    echo "Ошибка захвата"
+fi
