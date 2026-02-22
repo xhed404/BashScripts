@@ -1,0 +1,22 @@
+#!/bin/bash
+REPOS_DIR="${1:-~/projects}"
+cd "$REPOS_DIR" || exit 1
+
+echo "Обновляем все репозитории в $REPOS_DIR..."
+
+find . -maxdepth 2 -name ".git" -type d | while read -r gitdir; do
+    cd "$(dirname "$gitdir")" || continue
+    echo "$(basename "$PWD")"
+    
+    git fetch --all --quiet
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse @{u} 2>/dev/null || echo "")
+    
+    if [ "$LOCAL" != "$REMOTE" ]; then
+        git pull --quiet
+        echo "   Обновлено!"
+    else
+        echo "   Актуально"
+    fi
+done
+echo "Готово!"
