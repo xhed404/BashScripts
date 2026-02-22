@@ -1,0 +1,17 @@
+#!/bin/bash
+DOWNLOADS_DIR="${1:-.}"
+mkdir -p "$DOWNLOADS_DIR/Картинки" "$DOWNLOADS_DIR/Документы" "$DOWNLOADS_DIR/Видео"
+
+echo "Сортируем файлы в $DOWNLOADS_DIR..."
+
+find "$DOWNLOADS_DIR" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.bmp" -o -iname "*.webp" -o -iname "*.svg" -o -iname "*.tiff" \) -print0 | xargs -0 mv -t "$DOWNLOADS_DIR/Картинки/"
+echo "Картинки перемещены"
+
+find "$DOWNLOADS_DIR" -maxdepth 1 -type f \( -iname "*.pdf" -o -iname "*.doc" -o -iname "*.docx" -o -iname "*.txt" -o -iname "*.odt" -o -iname "*.rtf" -o -iname "*.xls" -o -iname "*.xlsx" -o -iname "*.ppt" -o -iname "*.pptx" -o -iname "*.epub" \) -print0 | xargs -0 mv -t "$DOWNLOADS_DIR/Документы/"
+echo "Документы перемещены"
+
+find "$DOWNLOADS_DIR" -maxdepth 1 -type f \( -iname "*.mp4" -o -iname "*.avi" -o -iname "*.mkv" -o -iname "*.mov" -o -iname "*.webm" -o -iname "*.flv" -o -iname "*.wmv" -o -iname "*.mpeg" -o -iname "*.mpg" \) -print0 | xargs -0 mv -t "$DOWNLOADS_DIR/Видео/"
+echo "Видео перемещены"
+
+REMAINING=$(find "$DOWNLOADS_DIR" -maxdepth 1 -type f | wc -l)
+echo "Готово! Осталось файлов: $REMAINING"
