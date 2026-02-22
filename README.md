@@ -42,8 +42,11 @@ notify-send уведомление
 
 text
 Картинки/    jpg png gif bmp webp svg tiff jpeg
+
 Документы/   pdf doc docx txt odt rtf xls xlsx ppt pptx epub  
+
 Видео/       mp4 avi mkv mov webm flv wmv mpeg mpg
+
 Особенности:
 
 Только файлы из корня (-maxdepth 1)
