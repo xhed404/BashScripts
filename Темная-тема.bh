@@ -1,0 +1,26 @@
+#!/bin/bash
+LOCATION="Moscow" # Если Вы смотрите это скрипт, то укажите Ваш город для корректной работы скрипта!
+LAT=55.7558
+LON=37.6176
+
+if ! curl -s --max-time 5 "https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=today" >/dev/null; then
+    echo "Нет интернета, используем время"
+    HOUR=$(date +%H)
+    [ "$HOUR" -ge 7 ] && [ "$HOUR" -le 19 ] && MODE="light" || MODE="dark"
+else
+    SUNRISE=$(curl -s "https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=today" | jq -r '.results.sunrise' | cut -d':' -f1)
+    SUNSET=$(curl -s "https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LON}&date=today" | jq -r '.results.sunset' | cut -d':' -f1)
+    HOUR=$(date +%H)
+
+    if [ "$HOUR" -ge "$SUNRISE" ] && [ "$HOUR" -le "$SUNSET" ]; then
+        MODE="light"
+    else
+        MODE="dark"
+    fi
+fi
+
+[ "$MODE" = "dark" ] && gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+[ "$MODE" = "light" ] && gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
+
+notify-send "Тема: $MODE" "Время: $(date +%H):00" 2>/dev/null || true
+echo "Переключено на $MODE"
