@@ -1,0 +1,19 @@
+#!/bin/bash
+clear
+echo "======================================== $(date '+%d.%m %H:%M')"
+CPU=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d'%' -f1)
+RAM=$(free | awk 'NR==2{printf "%.1f%%", $3*100/$2}')
+DISK=$(df / | awk 'NR==2{printf "%.1f%%", $5}')
+
+COLOR_CPU=$([[ $(echo "$CPU > 80" | bc -l) -eq 1 ]] && echo "\033[1;31m" || echo "\033[1;32m")
+COLOR_RAM=$([[ $(echo "$RAM > 80" | bc -l) -eq 1 ]] && echo "\033[1;31m" || echo "\033[1;32m")
+COLOR_DISK=$([[ $(echo "$DISK > 90" | bc -l) -eq 1 ]] && echo "\033[1;31m" || echo "\033[1;32m")
+
+echo -e "CPU:  ${COLOR_CPU}${CPU}%\033[0m"
+echo -e "RAM:  ${COLOR_RAM}${RAM}\033[0m" 
+echo -e "Disk: ${COLOR_DISK}${DISK}\033[0m"
+
+if (( $(echo "$CPU > 90" | bc -l) )); then
+    echo "CPU перегружен!"
+fi
+echo "========================================"
