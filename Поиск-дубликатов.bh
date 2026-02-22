@@ -1,0 +1,22 @@
+#!/bin/bash
+SCAN_DIR="${1:-.}"
+MIN_SIZE="${2:-1M}"
+
+echo "Сканируем дубликаты в $SCAN_DIR (минимум $MIN_SIZE)..."
+
+find "$SCAN_DIR" -type f -size "+$MIN_SIZE" -printf '%s %p\n' | \
+sort -rn | \
+awk '$1==p{s+=$1;c++} {p=$1} END{print s,c}' | \
+sort -rn | head -10
+
+echo -e "\nУдаляем дубликаты? (y/N)"
+read -r answer
+[[ $answer =~ ^[Yy] ]] || exit 0
+
+find "$SCAN_DIR" -type f -size "+$MIN_SIZE" -print0 | \
+xargs -0 -I {} sh -c 'md5sum "$1"' _ {} | \
+sort | uniq -w32 -d | \
+awk '{print $2}' | \
+xargs -I {} rm -v "{}"
+
+echo "Дубликаты удалены!"
