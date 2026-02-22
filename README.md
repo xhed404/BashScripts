@@ -93,9 +93,13 @@ Fallback: без интернета - 7:00-19:00 светлый
 И насчёт совместимости:
 
 Ubuntu 24.04/25.04
+
 Debian 12/13
+
 Fedora 41/42
+
 Arch Linux
+
 macOS (кроме dark-mode)
 
 Лицензия - MIT!
