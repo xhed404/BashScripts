@@ -46,11 +46,9 @@
 
 Что делает:
 
-   repo1        # Находит .git папки (maxdepth 2)
-  - Актуально
+-   repo1 - Актуально   # Находит .git папки (maxdepth 2) 
 
-   repo2
-  - Обновлено!   # git fetch + pull
+-   repo2 - Обновлено!   # git fetch + pull
 
 ## 5. ПОИСК ДУБЛИКАТОВ ФАЙЛОВ
 
