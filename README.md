@@ -12,54 +12,40 @@
 
 Показывает:
 
-CPU % (красный >80%)
-
-RAM % (красный >80%)
-
-Диск / (красный >90%)
-
-Авария CPU >90%
-
-Зависимости: bc
+- **CPU % (красный >80%)**
+- **RAM % (красный >80%)**
+- **Диск / (красный >90%)**
+- **Авария CPU >90%**
+- **Зависимости: bc**
 
 ## 2. ПРОФЕССИОНАЛЬНЫЕ СКРИНШОТЫ XD
 
 Сохраняет: ~/Pictures/Screenshots/YYYYMMDD_HHMMSS_screenshot.png
 
 Функции:
-
-grim (Wayland) / scrot (X11)
-
-exiftool метаданные (дата/время)
-
-notify-send уведомление
-
-Зависимости: grim ИЛИ scrot, exiftool
+- **grim (Wayland) / scrot (X11)**
+- **exiftool метаданные (дата/время)**
+- **notify-send уведомление**
+- **Зависимости: grim ИЛИ scrot, exiftool**
 
 ## 3. СОРТИРОВКА ЗАГРУЗОК
 
 Создаёт папки:
 
-text
-Картинки/    jpg png gif bmp webp svg tiff jpeg
-
-Документы/   pdf doc docx txt odt rtf xls xlsx ppt pptx epub  
-
-Видео/       mp4 avi mkv mov webm flv wmv mpeg mpg
+- **Картинки/    jpg png gif bmp webp svg tiff jpeg**
+- **Документы/   pdf doc docx txt odt rtf xls xlsx ppt pptx epub**
+- **Видео/       mp4 avi mkv mov webm flv wmv mpeg mpg**
 
 Особенности утилиты:
+- **Только файлы из корня (-maxdepth 1)**
+- **Игнорирует регистр (-iname)**
 
-Только файлы из корня (-maxdepth 1)
-
-Игнорирует регистр (-iname)
-
-А также - безопасно для пробелов (-print0 | xargs -0)
+**А также - безопасно для пробелов (-print0 | xargs -0)**
 
 ## 4. МАССОВОЕ ОБНОВЛЕНИЕ GIT
 
 Что делает:
 
-text
    repo1        # Находит .git папки (maxdepth 2)
    Актуально
 
@@ -70,37 +56,30 @@ text
 
 Алгоритм:
 
-Группирует по размеру
-
-Показывает TOP-10 статистику
-
-Подтверждение: y/N
-
-md5sum - удаление дублей
+- **Группирует по размеру**
+- **Показывает TOP-10 статистику**
+- **Подтверждение: y/N**
+- **md5sum - удаление дублей**
 
 ## 6. АВТОМАТИЧЕСКАЯ ТЕМА (GNOME)
 
 Логика переключения:
 
-День (солнце): Adwaita
-Ночь: Adwaita-dark
-Источник: sunrise-sunset.org API (Москва 55.7558,37.6176)
+- **День (солнце): Adwaita**
+- **Ночь: Adwaita-dark**
+- **Источник: sunrise-sunset.org API (Москва 55.7558,37.6176)**
 
-Fallback: без интернета - 7:00-19:00 светлый
+**Fallback: без интернета - 7:00-19:00 светлый**
 
-Зависимости: curl jq gsettings
+**Зависимости: curl jq gsettings**
 
-И насчёт совместимости:
+## И насчёт совместимости:
 
-Ubuntu 24.04/25.04
-
-Debian 12/13
-
-Fedora 41/42
-
-Arch Linux
-
-macOS (кроме dark-mode)
+- **Ubuntu 24.04/25.04**
+- **Debian 12/13**
+- **Fedora 41/42**
+- **Arch Linux**
+- **macOS (кроме dark-mode)**
 
 ## Лицензия - MIT!
 
